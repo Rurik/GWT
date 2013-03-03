@@ -1,0 +1,190 @@
+                           AUTOMATIC OVERLAY UNIT
+                              Copyright 1995
+                                   By
+                     Neil J. Rubenking and Bob Dalton
+
+                               INTRODUCTION:
+                               ------------
+          At one time or another your door program will get so large
+          that you will need to overlay a portion of it to conserve
+          memory. This unit adds that function to the DDPlus package.
+          The INITOVER.PAS code included in this archive is FREEWARE
+          and can be used in any manner you want and without cost, but
+          remains copyrighted to Neil Rubenking. Everything else
+          is copyrighted by Bob Dalton. I have made several changes to
+          that unit to allow them to function better with doors, so
+          blame any errors from changes on Bob Dalton. I am not an
+          expert on overlay techniques so feel free to contribute
+          enhancements, corrections, etc if you see something which
+          could be done better, faster, etc..
+
+                                REQUIREMENTS:
+                                ------------
+          At this point in time the only requirements are that you must
+          be using Borland Turbo Pascal version 6.0 or 7.0.  I compiled
+          the unit with Borland Pascal 7.0 Professional and know it
+          works. I expect it will with TP 6.0 as well but can't guarantee
+          it. 
+
+                                Files Included
+                                --------------
+          Below is a listing of all files for the OVERLAY.ZIP Package:
+
+          OVERLAY.DOC  - The text file you are reading.
+          INITOVER.PAS - The Overlay routines unit by Neil Rubenking.
+
+                    Installation and Preparation for Use
+                    ------------------------------------
+ 
+          1. Move the archive package to a temporary directory and "unzip".
+
+          2. Before compiling the INITOVER.pas unit be sure that your
+             compiler knows where to find the listed units.
+
+          3. Add INITOVER to the "Uses" portion of your program and call
+             the procedures as needed and shown below.
+
+          4. That's it!  Enjoy and good luck.
+
+
+                   ABOUT OVERLAYS AND HOW TO USE THEM
+                   ----------------------------------
+          
+          1.  If an EMS driver can be detected and if enough EMS memory
+          is available, the OvrInitEMS loads all overlays into EMS and
+          close the overlay file. Subsequent overlay loads are reduced
+          to fast in memory transfers. OvrInit installs an exit procedure,
+          which automatically deallocates EMS memory upon termination of
+          your door program. In case any error occurs, such as NO EMS
+          driver present, then overlays will be read from disk.
+         
+          2.  Using OvrInitEMS to place the file in EMS doesn't eliminate
+          the need for an overlay buffer.  Overlays must still be copied
+          from EMS into normal memory in the overlay buffer before they
+          can be executed, but because such-in memory transfers are
+          significantly faster than disk reads, there is less need to
+          increase the size of the overlay buffer.
+          
+          3.  When it is executing overlaid units, Turbo Pascal allocates 
+          as much space in the code segment as needed by the largest of
+          the overlaid units, so try to keep your units more or less the
+          same size.
+ 
+          4.  As stated above remember that if there is not enough EMS
+          allocated or available then it loads the unit into overlay
+          buffer memory from disk instead of EMS. Doing it from disk
+          takes time and this is the tradeoff you make to reduce code
+          size. Using overlays wisely, however, can minimize the cost
+          in speed. First, overlaying seldom used units minimizes the
+          impact on the overall execution speed of the program; you will
+          barely notice the time required to load such units.  If
+          however, the overlay needs to be loaded every few minutes or
+          seconds, the impact will be much greater. Keep in mind that
+          only ONE overlaid unit can be in buffer memory at any one time
+          using THIS unit.  In other words ProcedureB (overlaid) cannot
+          call to ProcedureA which is also in another overlaid unit. If
+          it does, Turbo Pascal will load Unit A which contains ProcedureA,
+          thus wiping out Unit B which contains ProcedureB in the process,
+          which will slow things down and possibly cause a crash or a hang.
+          Be very careful to ensure that your door program contains no
+          conflicting overlay calls of this nature. Ideally the units
+          which are overlaid should make NO procedure/function calls to
+          any other OVERLAID unit, but only to non-overlaid units.  In
+          future versions of DDPlus we will expand this package and show
+          you how to get around that limitation and use some more
+          sophisticated overlay techniques.
+ 
+          5.   You cannot overlay ANY unit that makes a dos interrupt
+          service call, or interrupt handlers such as SYSTEM, OVERLAY,
+          GRAPH, TURBO3, GRAPH3, CRT, ELOG.PAS or INITOVER.PAS unit. See
+          your Borland reference books for further information, if you
+          need to know more (in the Language Guide pg 250 for Borland
+          Pascal with Objects TP 7.0).
+
+          6.   See the INITOVER.PAS unit for other things you will have
+          to do.
+
+          7.   To avoid overlay "thrashing" do not overlay units you
+          use a lot.
+
+                        TO USE THE INITOVER.PAS UNIT
+                        ---------------------------
+ 
+ If your program becomes to large you can use this unit to provide automatic
+ overlay initialization and setup. To use it see the partial extract of the
+ following door example (main unit) for GodFather of Crime (GOC):
+
+ PROGRAM World;
+           {$B+}
+           {$R-}
+           {$S+}
+           {$I+}
+           {$N-}
+           {$M 65520,16384,655360}
+
+           Uses Overlay,    {Must be listed first!}
+                InitOver,   {Must be listed second!}
+                Dos,        {Must be listed third, if used}
+                Crt,        {Must be listed fourth, if used}
+                DDPlus,     {Must be listed next}
+                Wutil,      {your other units you are using are listed next}
+                WorldVar,
+                Wmap,
+                WStart,
+                Woption,
+                Wsave,
+                Woption2,
+                Woption3,
+                Wduel;
+
+         {$O DDOvr }     {Must be shown if you are using overlays}
+         {$O DDOvr2 }    {Must be shown if you are using overlays}
+         {$O Wmap }      {Next comes the units you intend to overlay}
+         {$O Woption }
+         {$O Woption2 }
+         {$O Woption3 }
+         {$O Wduel }
+
+         Var Dummy:PlayerRecord;
+
+         etc...
+
+ In each of the overlayed units you would show the following:
+
+
+         UNIT Wmap;
+         {$F+,O+,V-}                             {Must be exactly as shown}
+         INTERFACE
+         Uses Crt,WorldVar,DDPlus,Wutil;         {units used by this unit}
+
+         Procedure InitGraph(VAR M: MapArray);   {your various procedures}
+         Procedure ShowGraph( M: MapArray );
+         Procedure InitCountry( VAR C: CountryArray );
+
+         etc...
+
+ Here is a sample of the first several lines of my main program which shows
+ you how to implement some of the above:
+
+ BEGIN (***  M A I N  ***)
+  OvrFileMode := 64;                 {File mode for overlay units}
+  GetDate(Year,Month,Day,DOW);
+  INITDOORDRIVER('GOC.CTL');
+  PROGNAME:='GODFATHER OF CRIME by Bob Dalton';
+  NOTIME:='*** TIME HAS EXPIRED ***';
+  If Graphics < 3 Then
+  Begin
+    Wn('The game requires ANSI or RIP color and graphics.');
+    Wn('Your current parameters do not qualify you for either.');
+    Wn('To play this game, go back to the BBS and select the ANSI');
+    Wn('or RIP graphics option usually found in the Utilities Menus.');
+    Crlf;Wn('ASK YOUR SYSOP IF YOU HAVE FURTHER PROBLEMS!');
+    Crlf;
+    Crlf;
+    Wn('Sending you back to the BBS.....');
+    Delay(2500);
+    Crlf;
+    Exit
+   End;
+ 
+  

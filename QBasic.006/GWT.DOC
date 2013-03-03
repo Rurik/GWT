@@ -1,0 +1,303 @@
+Galactic Warriors Tournament .035b - Written by GWT Coding members
+-----------------------------------------------------------------
+
+
+ 			-={GWT .035c}=-
+; Added HPrint, a stupid little delayed text printer -=]
+
+- Changed the tower around a lot, even added a litebar,
+  but dropped it after remembering what hell it was for
+  2400 callers -=]
+
+                        -={GWT .035b}=-
+                            7/19/95
+; Added THE Tower, a suggestion by Jim Pannacciulli.  You
+  can.. well.. find out yourself -=]
+
+; Changed the format of the history file. * = bug fix,
+  ; = addition, - = change, and PLEASE, start putting dates
+  on here -=]
+
+* Fixed the Cave IGM.... now it ACTUALLY works -=]
+
+                        -={GWT .035a}=-
+                            7/19/95
+; Trading weapons/armor added
+
+; other things Jetlag did -=]
+
+                        -={GWT .03d}=-
+                    
+* Bugs were everywhere but now they're fixed
+
+- Prepared GWTMAIN for multi-planets
+
+* File opening error in mail was fixed
+
+                        -={GWT .03c}=-
+                    
+* Attack Enemy fatal error fixed
+
+                        -={GWT .03b}=-
+                   
+* E-Mail fatal error fixed
+
+                        -={GWT .03a}=-
+                    
+; EMail now has reply(quote), delete, ignore options
+
+; Expert Mode now available
+
+; No ANSi really mean NO ANSi
+
+- Special Screen routines made because of color handling. I can just
+  put the QBSerial routines in them and change everything to QB.??????               
+
+- All enemies are in one file
+
+- EDITOR.BAS has been updated
+
+- more .cfg options
+
+                        -={GWT .02d}=-
+                     
+; External Menus
+                     
+; auto ANSi detection
+
+; whatever else Brian did ; he should write in here more often
+
+                        -={GWT .02c}=-
+                     
+* Fixed a small player score bug
+                      
+                        -={GWT .02b}=-
+
+- Redid E-Mail... cool! 100 lines
+
+* umm.. Codey was playing with three FREEFILEs in a row... w/o
+  openin' the files so they were free each time... each file
+  tried to open as #2... geez! BUG FIX
+
+* flirt and trip only one time a day... yes, you did see this
+  before... laziness screwed us up... but fixed now
+
+                        -={GWT .02a}=-
+
+- Updated CAVEIGM.EXE for new structures.
+
+; Took out the Pword variable. You must delete CAVEIGM.DAT and
+  GWTPLAY.DAT now.
+
+; Packaged it up with the .MAK to get it to link right. <G>
+
+- Changed Player name to Real Name in the stats at bottom.
+
+; Will check to see if GWTPLAY.DAT is corrupted now.
+
+                        -={GWT .01b}=-
+
+; comma in listings and stuff
+
+; different search for player routine (the other wasn't working perfect?)
+
+; slaughter fans
+
+* updated gwt.bat and worked on the ansi's a little
+
+- armor and weapon in file!
+
+                        -={GWT .01a}=-
+
+; Added tripping.
+
+* Fixed locker screen.
+
+* took out that bad ol view print <G>
+
+; screens for healing are in.
+
+                        -={GWT .009b}=-
+
+; Added Flirting option in the inn.  Though this is only to flirt with
+  the females.. but hey, there's lesbians out there you know!
+
+; Added the healer's shack to the arena menu.
+
+* Fixed a bug that Jeff found in the Healer's that would give the user
+  unlimited money!!!
+
+* Edited some of the menus so now two options won't share the same
+  command -=]
+
+; GWT will now read the user's name from any DOOR.SYS style drop file. Run
+  GWTCFG to add the path to DOOR.SYS to the .CFG file (or put it there
+  yourself (With the "\" at the end!))
+
+                        -={GWT .009a}=-
+
+- nuttin big.. just made it into modules (well, Jeff started)
+  The source now has just 34k in it, maybe less.
+  I included all i could in the modules. From now on, lets keep
+  everything that we can in seperate modules from the main.
+                                                
+- Total reconstruction of the menus. Game looks unlike anything
+  its ever been like (or any other game I've seen).
+; Stores sell at random prices staying in a set range decided by
+  the selling price. (ex. $450-any # between-$500-any # between-$550
+  if price is $500)
+; SCREENS.BAS holds all screens now because external screens would make
+  complications
+; 255 fights in locker limit has been made and 255 fights planned limit
+  was made
+
+                        -={GWT .008c}=-
+
+; You cannot sign on as, fight, write email, or list "X" and ""
+
+- some PRINT coding was messed up but was fixed and you die now when
+  you try to sell your hands (forgot RecStuff.CurrentHit in Weapon Shop)
+
+                        -={GWT .008b}=-
+
+- Updated CAVEIGM.BAS. Now it only lets you use Blessing once a day.
+
+; Put in the store code and changed opening weapons.
+
+* Corrected bug. Pause is back to sub :) the Function would put
+  a 0 in it.
+
+* Got rid of chat in the IGM to save code, since GWT has it.
+
+                        -={GWT .008a}=-
+
+; E-mail has been added! Read and Send
+; IGM Mail is in it now! IGM's can send mail like this:
+  IGMMSG.1 - is the messages. All mail can use pipe code.
+- Removed unused code.
+* Bug fix for chat. It scrolled a little if too long.
+
+                        -={GWT .007c}=-
+
+* Many bug fixes! Fixed both IGM's for the GWTPLAY format.
+* Line Format in locker was corrected.
+* Arena Fights has been fixed (it let you have infinite before).
+
+                        -={GWT .007b}=-
+
+; Really cool chat room
+- Dead in player.dat is no more and has been replaced by Sex
+- Player.Dat is now GWTPlay.Dat
+- Scores.* are now GWTScore.*
+* Fixed some things in Editor.Bas
+
+                        -={GWT .007a}=-
+
+; User Fights added by Brian, modified to work :)
+; Added Player Chatting in Hotel.
+- Changed colors of stats
+
+                        -={GWT .006b}=-
+
+- Changed GWT.EXE to GWTMAIN.EXE. This is for IGM's. Can't have
+  GWT batch and EXE ya know? <g>
+
+* Modified stats a little to have more info. Arena fights, etc.
+
+* Redid IGM's. They now support up to 100 IGM's :)
+  They also can handle lines with ; at the beginning and blank
+  lines.
+
+* You get no more IGM.DAT is screwed up message now.
+
+; Got rid of pause with ansi. Now it pauses without the <PAUSE>
+  This lets us have any ansi in it, also I put in Jeff's ansi.
+  They switch back and forth <G>
+
+* A special bug fix for open.an?. It wouldn't display last line
+  for some reason <g>
+
+; Added in another IGM, Cave IGM. This has player convo and
+  more.
+
+* a Bug fix for death, it will look to see if player is dead when
+  returning from IGM.
+
+- The batch (GWT.BAT) now won't cycle ansi's if its returning from
+  an IGM.
+
+                        -={GWT .006a}=-
+
+; Added IGM ability (you must have NO spaces at end.
+  Goes like this:
+  Description - My New IGM
+  File Name- IGM.EXE
+  ok... well, you gotta edit IGM.DAT to add em.
+  I included a sample one called GAME.BAS.
+  Oh, you also have to compile GAME.BAS and GWT.BAS.
+  If you don't, it won't work.
+  The GWT.BAT runs a special file if its found to start the IGM.
+  The way I did it is better then Seth's :) Cuz mine doesn't need
+  to worry bout error levels. 1 flaw is the spaces at end though.
+  Use IGM's in Xtra places.
+
+                        -={GWT .005a}=-
+
+; Added in all of Jetlag's code from .004b.
+
+* Added levels to editor and redid the way levels were done in
+  GWT.BAS (it saves a little space now <g>)
+
+                        -={GWT .004b}=-
+
+- Enemies on different levels have been enabled, even
+  though there is no way to go up more levels. :(
+
+; All the utils have been put into one source (Editor.Bas)
+
+; Save challenges (fights) in locker and save money from
+  bank terminal.
+
+                        -={GWT .004a}=-
+
+; EDITOR.BAS made which includes a monster editor, player editor,
+  and player packer. Thanks to Brian :) (ok, one name didn't hurt? :-)
+
+; Will make score file when user quits game, saving time and gets more
+  accurate listings.
+
+; Made Config for it. Now you can change the path, and what you want
+  for the scores. More to be added, just lazy! :)
+
+                        -={GWT .003a}=-
+
+* Compiling bug is fixed :)
+
+* Removed excess battle code (for found no monster).
+
+; When quiting, scores.* are made.
+
+- Player listings will pause in the game now.
+
+                        -={GWT .002a}=-
+
+- Changed monster format and editor. Now has random sayings.
+  Changed monster conversion to work with old new newer format <g>
+
+* Fixed player editor to work right finally, I had it using old
+  variables.
+
+                        -={GWT .001a}=-
+
+; Added Arena fights and modified player editor structure.
+  Get rid of your old player file <g> Sorrrrrrryyyyyy! :)
+  You Can't edit the new stuff in player editor yet.
+  Maybe one of you add it? I'm getting some other stuff together.
+
+; Added Weapon and Armor naming.
+
+; Can't go passed Total Arena Fights per day.
+
+* Got rid of Brian's excess code (the haven't found shit feature :)
+  It didn't work (your new way disabled it, but you bundled it in)
+  You done a great job on monster fighting Brian :)

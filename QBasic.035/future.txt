@@ -1,0 +1,18 @@
+
+This discusses GWT's future features. <g>
+
+Future Features:
+---------------
+
+- Up to 255 levels (as many as the sysop wants)
+  The sysop can modify the level masters stats.
+
+- NPC's (if we ever find a good way to do it <g>)
+
+- A place to battle masters
+
+- Rip/Ansi/etc files (menus) that can be changed.
+
+- IGM Manager and Level Editor.
+
+- Multi-node support.
